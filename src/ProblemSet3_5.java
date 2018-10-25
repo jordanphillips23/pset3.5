@@ -23,9 +23,12 @@ public class ProblemSet3_5 {
 		
 		ps.primes(1, 1000);
 		ps.leapYears(1);
-		ps.palindromicNumbers(71);
-		ps.fibonacci(11);
-	}
+		ps.palindromicNumbers(11);
+		ps.fibonacci(21);
+		ps.multiples(3, 5, 11);
+		
+		}
+	
 	
 	/**
 	 * How many prime numbers are there between @start and @end, where @start and @end
@@ -49,7 +52,7 @@ public class ProblemSet3_5 {
 			System.out.println("There is 1 prime number.");
 		}
 		else {
-			System.out.println("There is "+ primecounter + " prime number.");
+			System.out.println("There are "+ primecounter + " prime numbers.");
 		}
 		
 		
@@ -58,6 +61,9 @@ public class ProblemSet3_5 {
 	public boolean isPrime(int num) {
 		int counter = 2;
 		boolean isPrime = true;
+		if (num > 3 && !(num % 6 == 1 || num % 6 == 5)) {
+			return false;
+		}
 		while ((counter <= (double) Math.sqrt(num)) && isPrime) {
 			if (num % counter == 0) {
 				isPrime = false;
@@ -91,6 +97,10 @@ public class ProblemSet3_5 {
 	
 	public void leapYears(int count) {
 		int year = 2018;
+		if (count < 1) {
+			System.out.println("I don't know how to compute the next " + count + " leap years...");
+			return;
+		}
 		if (count == 1) {
 			System.out.print("The next leap year is ");
 		}
@@ -106,8 +116,12 @@ public class ProblemSet3_5 {
 			if (i + 2 < count) {
 				System.out.print(", ");
 			}
+		
 			if (i + 2 == count) {
-				System.out.print(", and ");
+				if (count != 2) {
+					System.out.print(",");
+				}
+				System.out.print(" and ");
 			}
 		}
 		System.out.println(".");
@@ -152,8 +166,8 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void fibonacci(int n) {
-		int num1 = 1;
-		int num2 = 1;
+		long num1 = 1;
+		long num2 = 1;
 		if (n == 1) {
 			System.out.println("The 1st Fibonacci number is 1.");
 		}
@@ -163,12 +177,12 @@ public class ProblemSet3_5 {
 		else {
 			
 			for (int i = 2; i < n; i++) {
-				int temp = num2;
+				long temp = num2;
 				num2 += num1;
 				num1 = temp;	
 			}
 			
-			if (n % 100 > 10 && n % 100 < 20) {
+			if (n % 100 >= 11 && n % 100 <= 13) {
 				System.out.println("The " + n + "th Fibonacci number is " + num2 + ".");
 			}
 			
@@ -206,6 +220,15 @@ public class ProblemSet3_5 {
 	 */
 	
 	public void multiples(int x, int y, int limit) {
-
+		long sum = 0;
+		
+		for (int i = 0; i < limit; i++) {
+			
+			if (i % x == 0 || i % y == 0) {
+				sum += i;
+			}
+		}
+		
+		System.out.println("The sum of all multiples of " + x + " and " + y + " less than " + limit + " is " + sum + ".");
 	}
 }
